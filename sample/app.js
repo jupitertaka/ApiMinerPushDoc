@@ -59,9 +59,15 @@ async function generateReport(address, first) {
   }
 
   for (var i = 0; i < dataCount; i++) {
-    var sampling_time = now - ((i + 1) * 5 * 60);
-    var power = Math.round(Math.random() * Miner.capacity * 0.5);
-    energy = Math.round(energy / 1000 + (power * (5 * 30 / 3600)));
+    var sampling_time = now - ((12 - i) * 5 * 60);
+    if (first) {
+		    sampling_time = now - ((i + 1) * 5 * 60);
+	  }
+	  var power = Math.round(Math.random() * Miner.capacity * 0.5);
+	  if (i > 0) {
+		    energy = energy * 1000;
+	  }
+	  energy = Math.round(energy / 1000 + 1);
 
     var data = {
       sampling_time: sampling_time,//UTC seconds from 1970/01/01 00:00:00 
